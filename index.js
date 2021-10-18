@@ -36,7 +36,13 @@ intakeContinue = () => {
 }
 
 createTeamPage = () => {
-
-}
+    fs.writeFile("aboutus.html",team, (err) => {
+      if(err) {
+        throw err;
+      };
+      console.log("Your team has been constructed!");
+    });
+    open("team.html");
+};
 
 intake();
