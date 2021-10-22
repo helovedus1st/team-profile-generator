@@ -8,26 +8,14 @@ const Intern = require('./lib/Intern');
 const questions = require('./lib/questions');
 const htmlCreate = require('./lib/htmlCreate')
 
-const allClassified = [];
-const managerObj = [];
-const engineerObjs = [];
-const internObjs = [];
-
+const allInstances = [];
 
 intake = () => {
     inquirer.prompt(questions.managerQs)
     .then(({team, name, id, email, officeNum}) => {
         const managerInstance = new Manager(team, name, id, email, officeNum);
-        managerObj.push(managerInstance);
-        console.log(managerObj);
-        fs.writeFile("manager.html", htmlCreate.manager(managerInstance), (err) => {
-            if(err) {
-              throw err;
-            };
-            console.log("Your manager has been constructed!");
-          });
-          open("manager.html");
-
+        managerInstance.role = managerInstance.getRole();
+        allInstances.push(managerInstance);
         intakeContinue();
     });
 };
@@ -36,7 +24,8 @@ intakeEngineer = () => {
     inquirer.prompt(questions.engineerQs)
     .then(({name, id, email, github}) => {
         const engineerInstance = new Engineer(name, id, email, github);
-        engineerObjs.push(engineerInstance);
+        engineerInstance.role = engineerInstance.getRole();
+        allInstances.push(engineerInstance);
         intakeContinue(); 
     })
 }
@@ -45,11 +34,11 @@ intakeIntern = () => {
     inquirer.prompt(questions.internQs)
     .then(({name, id, email, school}) => {
         const internInstance = new Intern(name, id, email, school);
-        internObjs.push(internInstance);
+        internInstance.role = internInstance.getRole();
+        allInstances.push(internInstance);
         intakeContinue(); 
     })
 }
-
 
 intakeContinue = () => {
     inquirer.prompt(questions.continue)
@@ -70,48 +59,14 @@ intakeContinue = () => {
     })
 }
 
-createTeamPage = () => {
-    // fs.writeFile("manager.html", htmlCreate.manager(managerObj), (err) => {
-    //   if(err) {
-    //     throw err;
-    //   };
-    //   console.log("Your manager has been constructed!");
-    // });
-    // open("manager.html");
-    
-    // fs.writeFile("engineers.html", htmlCreate.engineer(engineerObjs), (err) => {
-    //     if(err) {
-    //       throw err;
-    //     };
-    //     console.log("Your engineers have been constructed!");
-    //   });
-    //   open("engineers.html");
-      
-    // fs.writeFile("intern.html", htmlCreate.intern(internObjs), (err) => {
-    //     if(err) {
-    //       throw err;
-    //     };
-    //     console.log("Your interns have been constructed!");
-    //   });
-    //   open("intern.html");
-
-    //   fs.writeFile("closing.html", htmlCreate.closing(), (err) => {
-    //     if(err) {
-    //       throw err;
-    //     };
-    //     console.log("Your closing has been constructed!");
-    //   });
-    //   open("intern.html");
-
-
-    internObjs.push(allClassified);
-    engineerObjs.push(allClassified);
-    managerObj.push(allClassified);
-
-
-    console.log(internObjs, engineerObjs, managerObj);
-    console.log(allClassified);
-
+createTeamPage = () => {    
+    fs.writeFile("aboutus.html", htmlCreate(allInstances), (err) => {
+      if(err) {
+        throw err;
+      };
+      console.log("Your new team web page has been constructed!");
+    });
+    open("aboutus.html");
 };
 
 intake();
