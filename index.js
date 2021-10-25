@@ -1,7 +1,6 @@
 const fs = require('fs');
 const open = require('open');
 const inquirer = require('inquirer');
-const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager')
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -54,19 +53,21 @@ intakeContinue = () => {
                 console.log('Thank you! Your team web page is being created.')
                 createTeamPage();
                 break;
-            default: console.log(response.add); console.log('default triggered');
+            default: console.log(response.add); console.log('error');
         }
     })
 }
 
 createTeamPage = () => {    
-    fs.writeFile("aboutus.html", htmlCreate(allInstances), (err) => {
-      if(err) {
-        throw err;
-      };
-      console.log("Your new team web page has been constructed!");
-    });
-    open("aboutus.html");
+    data = htmlCreate(allInstances);
+    function writeToFile(filename, data) {
+        fs.writeFile(`./dist/${filename}`, data, (err) => 
+            err ? console.error(err) : console.log("Your new team web page has been constructed!")
+        )};
+
+    writeToFile("aboutus.html", (data))
+
+    open("./dist/aboutus.html");
 };
 
 intake();
