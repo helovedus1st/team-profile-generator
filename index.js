@@ -59,15 +59,11 @@ intakeContinue = () => {
 }
 
 createTeamPage = () => {    
-    data = htmlCreate(allInstances);
-    function writeToFile(filename, data) {
-        fs.writeFile(`./dist/${filename}`, data, (err) => 
-            err ? console.error(err) : console.log("Your new team web page has been constructed!")
-        )};
+    console.log(allInstances);
+        fs.writeFile(`./dist/aboutus.html`, htmlCreate(allInstances), (err) => 
+            err ? console.error(err) : console.log("Your new team web page has been constructed!"));
 
-    writeToFile("aboutus.html", (data))
-
-    open("./dist/aboutus.html");
+            open("./dist/aboutus.html");
 };
 
 intake();
