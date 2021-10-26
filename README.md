@@ -20,7 +20,13 @@ A Node CLI application for dynamically generating a team/company webpage from us
 ## Usage
 After installation, run "node index.js" from the command prompt. Answer each inquiry as you are prompted. When you are finished adding all employees, then select "I'm finished adding employees" from the final prompt. The application will automatically open your new team web page using your default browser application.
 
-Click the video link below for a walk-through of application functionality and testing:
+Click the [video link](https://watch.screencastify.com/v/RfU46pPk40M169VVvLPd) below for a walk-through of application functionality and testing:
+
+[<img src="walkthrough-screenshot.png">](https://watch.screencastify.com/v/RfU46pPk40M169VVvLPd)
+
+This preview of a sample page demonstrates a mobile-friendly layout:
+
+![sample view of team web page output](webpage-samples.png)
 
 ## Contributing
 Not applicable for this application.
